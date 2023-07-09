@@ -23,7 +23,7 @@ Route::get('/', 'App\Http\Controllers\ProdutosController@index')->name('produtos
 Route::view('/cadastro', 'cadastro')->name('cadastro');
 
 //tela de editar
-Route::view('/editar', 'editar')->name('editar');
+Route::view('/editar/{id}', 'editar')->name('editar');
 
 /* Route::get('/', function () {
     return view('welcome');
@@ -31,12 +31,14 @@ Route::view('/editar', 'editar')->name('editar');
 
 //CRUD Produtos
 Route::controller(ProdutosController::class)->group(function () {
-    Route::get('/getProdutos', 'index');
-    Route::post('/createProdutos', 'create');
-    Route::post('/editProdutos', 'edit');
-    Route::post('/deleteProdutos', 'destroy');
+    Route::get('/getProdutos', 'index'); //busca todos os produtos cadastrados
+    Route::get('/getProdutos/{id}', 'produto'); //busca o produto determinado pelo id
+    Route::post('/createProdutos', 'create'); //cadastra um novo produto
+    Route::post('/editProdutos/{id}', 'edit'); //altera o produto determinado pelo id
+    Route::post('/deleteProdutos/{id}', 'destroy'); //deleta o produto determinado pelo id
 });
 
+//API ViaCep
 Route::controller(ApiViaCepController::class)->group(function () {
     Route::get('/viaCEP/{CEP}', 'getCEP');
 });

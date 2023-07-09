@@ -6,7 +6,11 @@ module.exports = {
     "./resources/**/*.vue",
   ],
   theme: {
-    extend: {},
+    extend: {
+      gridTemplateColumns: {
+        '3': 'repeat(3, minmax(0, 1fr))',
+      },
+    },
   },
   plugins: [],
 }

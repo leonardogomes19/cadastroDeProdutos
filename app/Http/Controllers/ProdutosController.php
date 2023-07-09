@@ -11,21 +11,21 @@ class ProdutosController extends Controller
 {
     /* ROTAS PARA OUTRAS TELAS */
 
-        //renderizar tela de cadastro
-        public function telaCadastro()
-        {
-            return View::make('telaCadastro.Cadastro');
-        }
+    //renderizar tela de cadastro
+    public function telaCadastro()
+    {
+        return View::make('telaCadastro.Cadastro');
+    }
 
-        //renderizar tela de editar
-        public function telaEditar()
-        {
-            return View::make('telaEditar.Editar');
-        }
+    //renderizar tela de editar
+    public function telaEditar()
+    {
+        return View::make('telaEditar.Editar');
+    }
 
     /* FIM DAS ROTAS */
 
-    
+
     //retorna todos os produtos cadastrados
     public function index()
     {
@@ -35,6 +35,17 @@ class ProdutosController extends Controller
             return view('welcome', compact('produtos'));
             //return $produtos;
 
+        } catch (\Throwable $th) {
+            return $th->getMessage();
+        }
+    }
+
+    //retorna o produto cadastrado determinado pelo id
+    public function produto($id)
+    {
+        try {
+            $produtos = Produtos::orderByDesc('id')->where('id', $id)->get();
+            return $produtos;
         } catch (\Throwable $th) {
             return $th->getMessage();
         }
@@ -68,13 +79,12 @@ class ProdutosController extends Controller
     {
         try {
             $produto = Produtos::find($id);
-            $produto->codigoId = $request->post('codigoId');
+            $produto->codigoID = $request->post('codigoID');
             $produto->nome = $request->post('nome');
             $produto->linkImg = $request->post('linkImg');
             $produto->preco = $request->post('preco');
             $produto->CEP = $request->post('CEP');
             $produto->save();
-            
         } catch (\Throwable $th) {
             return $th;
         }
@@ -91,5 +101,4 @@ class ProdutosController extends Controller
             return $th;
         }
     }
-
 }
