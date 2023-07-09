@@ -87,17 +87,6 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     // Ação de exclusão confirmada
-                    Swal.fire({
-                        title: "Aguarde",
-                        text: "Excluindo produto...",
-                        imageUrl: "images/loading.gif",
-                        imageWidth: 100,
-                        imageHeight: 100,
-                        showConfirmButton: false,
-                        allowOutsideClick: false,
-                        allowEscapeKey: false,
-                        allowOutsideClick: false,
-                    });
 
                     // Envio da solicitação POST usando o Axios
                     axios.post(`/deleteProdutos/${id}`)
